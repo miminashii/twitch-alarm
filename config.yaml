@@ -1,0 +1,6 @@
+interval_seconds: 60
+alarm_filepath: res/ドラえもんの目覚まし時計の歌 covered by 息根とめる.wav
+twitch:
+  watched_channels:
+    - tomeru1
+    - koqchan
