@@ -80,8 +80,7 @@ class LoggerOutputs:
         pass
 
 
-def _is_live(channel: str, ydl_opts: dict = {"quiet": True}):
-    ydl_opts["logger"] = LoggerOutputs
+def _is_live(channel: str, ydl_opts: dict = {"quiet": True, "logger": LoggerOutputs}):
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.extract_info(_get_url(channel), download=False)

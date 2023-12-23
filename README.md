@@ -25,4 +25,4 @@
 ## FYI
 
 - `config.yaml`の`tomeru1`、`koqchan`を任意のチャンネルに変更すれば、そのチャンネルの配信開始を検知してアラームを鳴らせる。
-- `config.yaml`の`alarm_filepath`を変更することで、好きなアラームの音を鳴らせる。
+- `config.yaml`の`alarm_filepath`を変更することで、好きな音のアラームを鳴らせる。
