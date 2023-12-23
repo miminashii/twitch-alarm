@@ -13,10 +13,10 @@ TWITCH_BASE_URL = "https://www.twitch.tv"
 
 def main():
     try:
-        stored_config = _read_config()
+        config = _read_config()
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        loop.run_until_complete(_check_loop(stored_config))
+        loop.run_until_complete(_check_loop(config))
     except KeyboardInterrupt:
         print("\nInterrupted by user.")
         sys.exit(1)
@@ -76,9 +76,6 @@ class LoggerOutputs:
     def error(msg):
         pass
 
-    def warning(msg):
-        pass
-
     def debug(msg):
         pass
 
@@ -94,8 +91,7 @@ def _is_live(channel: str, ydl_opts: dict = {"quiet": True}):
 
 
 def _alarm(config: Config):
-    sound = AudioSegment.from_wav(config.alarm_filepath)
-    play(sound)
+    play(AudioSegment.from_wav(config.alarm_filepath))
 
 
 def _get_url(channel: str):
