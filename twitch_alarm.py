@@ -53,18 +53,24 @@ async def _check_loop(config: Config):
 
 
 async def _check_loop_child(channel: str, config: Config):
-    print(f'Waiting for "{channel}" to start a stream...')
+    waiting_msg = f'Waiting for "{channel}" to start a stream...'
+    start_msg = f'The channel "{channel}" started a stream!'
+    end_msg = f'The channel "{channel}" ended a stream.'
+
+    print(waiting_msg)
     currently_streaming = False
     while True:
         try:
             if (is_live := _is_live(channel)) and not currently_streaming:
-                print(f'The channel "{channel}" started a stream!')
+                print(start_msg)
+                _alarm(config.alarm_filepath)
                 currently_streaming = True
-                _alarm(config)
-            elif is_live and currently_streaming:
-                pass
-            else:
+            elif not is_live and currently_streaming:
+                print(end_msg)
                 currently_streaming = False
+                print(waiting_msg)
+            else:
+                pass
             await asyncio.sleep(config.interval_seconds)
         except Exception as err:
             print(err)
@@ -89,8 +95,8 @@ def _is_live(channel: str, ydl_opts: dict = {"quiet": True, "logger": LoggerOutp
         return False
 
 
-def _alarm(config: Config):
-    play(AudioSegment.from_wav(config.alarm_filepath))
+def _alarm(alarm_filepath: str):
+    play(AudioSegment.from_wav(alarm_filepath))
 
 
 def _get_url(channel: str):
