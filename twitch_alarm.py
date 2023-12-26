@@ -19,7 +19,6 @@ def main():
         loop.run_until_complete(_check_loop(config))
     except KeyboardInterrupt:
         print("\nInterrupted by user.")
-        sys.exit(1)
 
 
 @dataclass
@@ -69,8 +68,7 @@ async def _check_loop_child(channel: str, config: Config):
                 print(end_msg)
                 currently_streaming = False
                 print(waiting_msg)
-            else:
-                pass
+
             await asyncio.sleep(config.interval_seconds)
         except Exception as err:
             print(err)
