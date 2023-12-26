@@ -1,5 +1,6 @@
 import asyncio
 from dataclasses import dataclass, field
+import sys
 from typing import List
 
 import yt_dlp
@@ -18,6 +19,7 @@ def main():
         loop.run_until_complete(_check_loop(config))
     except KeyboardInterrupt:
         print("\nInterrupted by user.")
+        return 1
 
 
 @dataclass
@@ -101,4 +103,4 @@ def _get_url(channel: str):
 
 
 if __name__ == "__main__":
-    exit(main())
+    sys.exit(main())
